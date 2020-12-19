@@ -11,16 +11,18 @@
 <body>
   <h1>Server Side Calculator</h1>
   <div>
-    <input id="numOneIn" type="text" placeholder="Number here">
+    <input id="numOneIn" type="number" placeholder="Number here">
     <button id="addBtn">+</button>
     <button id="minusBtn">-</button>
     <button id="timesBtn">*</button>
     <button id="divideBtn">/</button>
-    <input id="numTwoIn" type="text" placeholder="Number here">
+    <input id="numTwoIn" type="number" placeholder="Number here">
     <button id="equalsBtn">=</button>
     <button id="clearBtn">C</button>
   </div>
-  <h2 id="sum">SUM</h2>
+  <div>
+    <h2>Result: <span id="result"></span></h2>
+  </div>
   <div>
     <ul id="equationHistory"></ul>
   </div>

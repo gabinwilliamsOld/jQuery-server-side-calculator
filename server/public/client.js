@@ -17,85 +17,130 @@ function handleReady() {
 
 }// end handleReady
 
-let numberValueOne = 0;
-let numberValueTwo = 0;
 
+let numberValueOne;
+let numberValueTwo;
+let operator;
 
-
-// INPUT FUNCTIONS
-
-// function handleInputOne() {
-//   console.log(numberValueOne);
-// }
-
-// function handleInputTwo() {
-//   console.log(numberValueTwo);
-// }
-
-
-
-// BUTTON FUNCTIONS
-
-// function renderToDom() {
-
-//   let numberValueOne = $('#numOneIn').val();
-//   let numberValueTwo = $('#numTwoIn').val();
-
-//   if(handleAdd) {
-//    let result = numberValueOne + numberValueOne;
-//    console.log('Add result:', result);
-//    return result;
-//   }else if(handleMinus) {
-//     let result = numberValueOne - numberValueTwo;
-//     console.log('Minus result:', result);
-//     return result;
-//   }else if(handleTimes) {
-//     let result = numberValueOne * numberValueTwo;
-//     console.log('Times result:', result);
-//     return result;
-//   }else if(handleDivide) {
-//     let result = numberValueOne / numberValueTwo;
-//     console.log('Divide result:', result);
-//     return result;
-//   }else if(handleClear) {
-//     numberValueOne.val('');
-//     numberValueTwo.val('');
-//   }
-
-// }
-
-
-
+function clearInputBox() {
+$('#numTwoIn').val('');
+$('#numOneIn').val('');
+}
 
 function handleAdd() {
   console.log('In handleAdd.  Clicked');
+
   numberValueOne = Number($('#numOneIn').val());
   numberValueTwo = Number($('#numTwoIn').val());
-  let result = numberValueOne + numberValueOne;
+  operator = 'add';
+  let result = numberValueOne + numberValueTwo;
+
   console.log('In handleAdd', result);
+  
+  $('#minusBtn').prop('disabled', true);
+  $('#timesBtn').prop('disabled', true);
+  $('#divideBtn').prop('disabled', true);
+  return result;
 }
 
 function handleMinus() {
   console.log('In handleMinus.  Clicked');
-  return true;
+
+  numberValueOne = Number($('#numOneIn').val());
+  numberValueTwo = Number($('#numTwoIn').val());
+  operator = 'minus';
+  let result = numberValueOne - numberValueTwo;
+
+  console.log('In handleMinus', result);
+  
+  $('#addBtn').prop('disabled', true);
+  $('#timesBtn').prop('disabled', true);
+  $('#divideBtn').prop('disabled', true);
+  return result;
 }
 
 function handleTimes() {
   console.log('In handleTimes.  Clicked');
-  return true;
+
+  numberValueOne = Number($('#numOneIn').val());
+  numberValueTwo = Number($('#numTwoIn').val());
+  operator = 'times';
+  let result = numberValueOne * numberValueTwo;
+
+  console.log('In handleTimes', result);
+  
+  $('#minusBtn').prop('disabled', true);
+  $('#addBtn').prop('disabled', true);
+  $('#divideBtn').prop('disabled', true);
+  return result;
 }
 
 function handleDivide() {
   console.log('In handleDivide.  Clicked');
-  return true;
+
+  numberValueOne = Number($('#numOneIn').val());
+  numberValueTwo = Number($('#numTwoIn').val());
+  operator = 'divide';
+  let result = numberValueOne / numberValueTwo;
+
+  console.log('In handleDivide', result);
+  
+  $('#minusBtn').prop('disabled', true);
+  $('#timesBtn').prop('disabled', true);
+  $('#addBtn').prop('disabled', true);
+  return result;
 }
 
 function handleEquals() {
   console.log('In handleEquals.  Clicked');
-  renderToDom();
+  $('#result').text('');
+  
+
+  if(!$('#addBtn').prop('disabled')) {
+    console.log('Data from add!!');
+    $('#equationHistory').append(`
+    <li>${numberValueOne} + ${numberValueTwo} = ${handleAdd()}</li>
+  `);
+    $('#result').text(handleAdd());
+
+  }else if(!$('#minusBtn').prop('disabled')) {
+    console.log('Data from minus');
+
+    $('#equationHistory').append(`
+    <li>${numberValueOne} + ${numberValueTwo} = ${handleMinus()}</li>
+  `);
+    $('#result').text(handleMinus());
+
+  }else if(!$('#timesBtn').prop('disabled')) {
+    console.log('Data from times');
+
+    $('#equationHistory').append(`
+    <li>${numberValueOne} + ${numberValueTwo} = ${handleTimes()}</li>
+  `);
+    $('#result').text(handleTimes());
+
+  }else if(!$('#divideBtn').prop('disabled')) {
+    console.log('Data from divide');
+
+    $('#equationHistory').append(`
+    <li>${numberValueOne} + ${numberValueTwo} = ${handleDivide()}</li>
+  `);
+    $('#result').text(handleDivide());
+
+  }else {
+    console.log('HandleEquals isnt working right');
+
+
+  }
+  clearInputBox();
 }
 
 function handleClear() {
   console.log('In handleClear.  Clicked');
-  
+  $('#result').text('');
+  clearInputBox();
+  $('#addBtn').prop('disabled', false);
+  $('#minusBtn').prop('disabled', false);
+  $('#timesBtn').prop('disabled', false);
+  $('#divideBtn').prop('disabled', false);
 }
