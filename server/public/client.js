@@ -107,7 +107,7 @@ function handleEquals() {
     console.log('Data from minus');
 
     $('#equationHistory').append(`
-    <li>${numberValueOne} + ${numberValueTwo} = ${handleMinus()}</li>
+    <li>${numberValueOne} - ${numberValueTwo} = ${handleMinus()}</li>
   `);
     $('#result').text(handleMinus());
 
@@ -115,7 +115,7 @@ function handleEquals() {
     console.log('Data from times');
 
     $('#equationHistory').append(`
-    <li>${numberValueOne} + ${numberValueTwo} = ${handleTimes()}</li>
+    <li>${numberValueOne} * ${numberValueTwo} = ${handleTimes()}</li>
   `);
     $('#result').text(handleTimes());
 
@@ -123,17 +123,35 @@ function handleEquals() {
     console.log('Data from divide');
 
     $('#equationHistory').append(`
-    <li>${numberValueOne} + ${numberValueTwo} = ${handleDivide()}</li>
+    <li>${numberValueOne} / ${numberValueTwo} = ${handleDivide()}</li>
   `);
     $('#result').text(handleDivide());
 
   }else {
     console.log('HandleEquals isnt working right');
-
-
   }
+  sendValues();
   clearInputBox();
 }
+
+function sendValues() {
+  let equationObject = {
+    valueOne: numberValueOne,
+    operator: operator,
+    valueTwo: numberValueTwo
+  }
+console.log('In sendValues:', equationObject);
+
+  $.ajax({
+    url: "/calculate",
+    type: "POST",
+    data: equationObject,
+  }).then(function (response) {
+    console.log(response);
+    
+  });
+}// end sendValues
+
 
 function handleClear() {
   console.log('In handleClear.  Clicked');
