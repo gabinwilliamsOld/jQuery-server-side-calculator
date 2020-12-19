@@ -63,16 +63,46 @@ function handleEquation(equationObject) {
   }else if (equationObject.operator === 'minus') {
     let result = Number(numberValueOne) - Number(numberValueTwo);
     console.log('In minus:', result);
+
+    let resultObject = {
+      valueOne: numberValueOne,
+      valueTwo: numberValueTwo,
+      operator: '-',
+      outcome: result
+    }
+
+    equationData.push(resultObject);
+
     return result;
 
   }else if (equationObject.operator === 'times') {
     let result = Number(numberValueOne) * Number(numberValueTwo);
     console.log('In times:', result);
+
+    let resultObject = {
+      valueOne: numberValueOne,
+      valueTwo: numberValueTwo,
+      operator: '*',
+      outcome: result
+    }
+
+    equationData.push(resultObject);
+
     return result;
 
   }else if (equationObject.operator === 'divide') {
-    let result = Number(numberValueOne) - Number(numberValueTwo);
+    let result = Number(numberValueOne) / Number(numberValueTwo);
     console.log('In divide', result);
+
+    let resultObject = {
+      valueOne: numberValueOne,
+      valueTwo: numberValueTwo,
+      operator: '/',
+      outcome: result
+    }
+
+    equationData.push(resultObject);
+
     return result;
 
   }else{
