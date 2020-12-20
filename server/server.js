@@ -11,16 +11,31 @@ app.use(express.static('server/public'));
 
 let equationData = [];
 
-
+const serverData =[];
 
 // GET ROUTE
 
+app.get("/data", (req, res) => {
+  console.log("you got to /calculate!");
+  console.log(serverData);
+  // response is to send inventory array
+  
+  res.send(serverData);
+
+});
+
+
 app.get("/calculate", (req, res) => {
   console.log("you got to /calculate!");
-
+  console.log(equationData);
   // response is to send inventory array
+  
+  serverData.push(equationData[0]);
+
   res.send(equationData);
+  
   equationData = [];
+
 });
 
 // POST ROUTE
@@ -109,66 +124,10 @@ function handleEquation(equationObject) {
     console.log('In handleEquation. This doesnt work!');
     return false;
   }
-
-  
-  
-
-  // console.log('In handleAdd', result);
-  
-  // $('#minusBtn').prop('disabled', true);
-  // $('#timesBtn').prop('disabled', true);
-  // $('#divideBtn').prop('disabled', true);
-  // return result;
-}
-
-// function handleEquals() {
-//   console.log('In handleEquals.  Clicked');
-//   $('#result').text('');
-  
-
-//   if(!$('#addBtn').prop('disabled')) {
-//     console.log('Data from add!!');
-//     $('#equationHistory').append(`
-//     <li>${numberValueOne} + ${numberValueTwo} = ${handleAdd()}</li>
-//   `);
-//     $('#result').text(handleAdd());
-
-//   }else if(!$('#minusBtn').prop('disabled')) {
-//     console.log('Data from minus');
-
-//     $('#equationHistory').append(`
-//     <li>${numberValueOne} - ${numberValueTwo} = ${handleMinus()}</li>
-//   `);
-//     $('#result').text(handleMinus());
-
-//   }else if(!$('#timesBtn').prop('disabled')) {
-//     console.log('Data from times');
-
-//     $('#equationHistory').append(`
-//     <li>${numberValueOne} * ${numberValueTwo} = ${handleTimes()}</li>
-//   `);
-//     $('#result').text(handleTimes());
-
-//   }else if(!$('#divideBtn').prop('disabled')) {
-//     console.log('Data from divide');
-
-//     $('#equationHistory').append(`
-//     <li>${numberValueOne} / ${numberValueTwo} = ${handleDivide()}</li>
-//   `);
-//     $('#result').text(handleDivide());
-
-//   }else {
-//     console.log('HandleEquals isnt working right');
-//   }
-//   sendValues();
-//   clearInputBox();
-// }
-
-
-
+}// end equation
 
 
 // START SERVER!
 app.listen(PORT, () => {
-  console.log('Server is running on port', PORT);
+  console.log ('Server is running on port', PORT)
 })

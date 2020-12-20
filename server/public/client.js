@@ -12,6 +12,8 @@ function handleReady() {
   $("#divideBtn").on("click", handleDivide);
   $("#equalsBtn").on("click", handleEquals);
   $("#clearBtn").on("click", handleClear);
+
+  initialDom();
 } // end handleReady
 
 // Global variables
@@ -42,6 +44,28 @@ function handleDivide() {
   operator = "divide";
 }
 
+// makes sure calculator history stays on DOM even after refresh
+function initialDom() {
+  $.ajax({
+    url: "/data",
+    type: "GET",
+  }).then(function (response) {
+    console.log(response);
+    // if array is empty, don't run.  This allows me to run in handle ready and not get undefined errors.
+    if (response.length <= 0) {
+      console.log("Should do nothing");
+      return true;
+      // loop through array and appends data to the DOM
+    } else {
+      for (let i = 0; i < response.length; i++) {
+        $("#equationHistory").append(
+          `<li>${response[i].valueOne} ${response[i].operator} ${response[i].valueTwo} = ${response[i].outcome}</li>`
+        );
+      } // end for
+    } // end else
+  }); // end promise
+} // end initialDom
+
 // receives data from data after logic functions have run on server and appends data to the DOM
 function renderToDom() {
   $.ajax({
@@ -49,14 +73,14 @@ function renderToDom() {
     type: "GET",
   }).then(function (response) {
     console.log(response);
-    console.log(response);
 
     $("#result").append(`${response[0].outcome}`);
     $("#equationHistory").append(
       `<li>${response[0].valueOne} ${response[0].operator} ${response[0].valueTwo} = ${response[0].outcome}</li>`
     );
-  });
-}
+    // end for
+  });// end promise
+}// end renderToDom
 
 // grabs values from input fields runs sendValues, clears inputs and result text
 function handleEquals() {
@@ -84,8 +108,9 @@ function sendValues() {
   }).then(function (response) {
     console.log(response);
     // runs renderToDom so new data appends to the DOM
+
     renderToDom();
-  });
+  });// end promise
 } // end sendValues
 
 // C button actions
