@@ -1,9 +1,11 @@
 # Project Name
 
-[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md
+JQuery-server-side-calculator
 
 ## Description
 
-Your project description goes here. What problem did you solve? How did you solve it?
+Simple calculator interface on DOM.
+All calculation happen on the server side and get sent back to the client.
+Calculation history stays on page even on page refresh.
 
-Additional README details can be found [here](https://github.com/PrimeAcademy/readme-template/blob/master/README.md).
+
